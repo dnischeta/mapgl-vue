@@ -1,45 +1,103 @@
 # mapgl-vue
 
-This template should help get you started developing with Vue 3 in Vite.
+A Vue 3 wrapper for the 2GIS MapGL library.
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+## Installation
 
 ```sh
-pnpm install
+npm install mapgl-vue
 ```
 
-### Compile and Hot-Reload for Development
+## Usage
 
-```sh
-pnpm dev
+First, install the plugin in your main Vue application file:
+
+```typescript
+import { createApp } from 'vue'
+import App from './App.vue'
+import { vueMapglPlugin } from 'mapgl-vue'
+
+createApp(App)
+  .use(vueMapglPlugin)
+  .mount('#app')
 ```
 
-### Type-Check, Compile and Minify for Production
+## Exported Entities
 
-```sh
-pnpm build
+The library exports the following entities:
+
+### vueMapglPlugin
+
+A Vue plugin that initializes the 2GIS MapGL library. It should be installed using `app.use()` as shown in the usage example above.
+
+### useMapgl
+
+A composable function that provides access to the MapGL SDK. It returns an object with the following properties:
+
+- `loading`: A computed ref indicating whether the SDK is still loading.
+- `sdk`: A computed ref containing the MapGL SDK once it's loaded.
+- `onMapglReady`: A function that takes a callback to be executed when the SDK is ready.
+
+Example usage:
+
+```vue
+<script setup>
+import { useMapgl } from 'mapgl-vue'
+
+const { loading, sdk, onMapglReady } = useMapgl()
+
+onMapglReady((mapglSdk) => {
+  // Use mapglSdk here
+})
+</script>
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+### useMap
 
-```sh
-pnpm test:unit
+A composable function for creating and managing a MapGL instance. It returns an object with the following method:
+
+- `createMap`: A function that takes an HTML element (or its ID) and map options to create a new map instance.
+
+Example usage:
+
+```vue
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useMap } from 'mapgl-vue'
+
+const mapContainer = ref(null)
+const { createMap } = useMap()
+
+onMounted(() => {
+  createMap(mapContainer.value, { center: [55.31878, 25.23584], zoom: 13 })
+})
+</script>
+
+<template>
+  <div ref="mapContainer" style="width: 100%; height: 400px;"></div>
+</template>
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+### useMapChild
 
-```sh
-pnpm lint
+A composable function for child components that need to interact with the map instance. It provides:
+
+- `onMapReady`: A function that takes a callback to be executed when both the SDK and map instance are ready.
+
+Example usage:
+
+```vue
+<script setup>
+import { useMapChild } from 'mapgl-vue'
+
+const { onMapReady } = useMapChild()
+
+onMapReady((sdk, map) => {
+  // Add markers, layers, or other map elements
+})
+</script>
 ```
+
+## License
+
+[MIT License](LICENSE)

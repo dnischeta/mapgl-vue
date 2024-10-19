@@ -1,11 +1,12 @@
 {
   "name": "mapgl-vue",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.0.1",
   "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "LICENSE"
   ],
+  "author": "Dmitry Nischeta <nish.dima@gmail.com>",
   "module": "./dist/mapgl-vue.js",
   "types": "./dist/dts/index.d.ts",
   "exports": {
