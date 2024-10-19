@@ -1,6 +1,6 @@
 {
   "name": "mapgl-vue",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A Vue 3 wrapper for the 2GIS MapGL library.",
   "keywords": [
     "2GIS",
