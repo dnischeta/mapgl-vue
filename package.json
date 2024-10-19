@@ -1,12 +1,22 @@
 {
   "name": "mapgl-vue",
   "version": "0.0.1",
+  "description": "A Vue 3 wrapper for the 2GIS MapGL library.",
+  "keywords": ["2GIS", "MapGL", "MapGL JS API", "Vue", "Vue map"],
+  "author": "Dmitry Nischeta <nish.dima@gmail.com>",
+  "homepage": "https://github.com/dnischeta/mapgl-vue",
+  "bugs": {
+    "url": "https://github.com/dnischeta/mapgl-vue/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnischeta/mapgl-vue.git"
+  },
   "type": "module",
   "files": [
-    "dist",
+    "dist/*",
     "LICENSE"
   ],
-  "author": "Dmitry Nischeta <nish.dima@gmail.com>",
   "module": "./dist/mapgl-vue.js",
   "types": "./dist/dts/index.d.ts",
   "exports": {
