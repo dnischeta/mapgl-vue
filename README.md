@@ -1,6 +1,6 @@
 # mapgl-vue
 
-A Vue 3 wrapper for the 2GIS MapGL library.
+A Vue 3 wrapper for the [2GIS MapGL](https://docs.2gis.com/en/mapgl/overview) library.
 
 ## Installation
 
