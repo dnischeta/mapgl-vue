@@ -18,11 +18,11 @@
     "LICENSE"
   ],
   "module": "./dist/mapgl-vue.js",
-  "types": "./dist/dts/index.d.ts",
+  "types": "./dist/dts/src/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/mapgl-vue.js",
-      "types": "./dist/dts/index.d.ts"
+      "types": "./dist/dts/src/index.d.ts"
     }
   },
   "scripts": {
