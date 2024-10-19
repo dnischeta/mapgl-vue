@@ -1,4 +1,4 @@
-import { provide, shallowRef, watch } from 'vue'
+import { provide, shallowRef, watch, onScopeDispose } from 'vue'
 import type { MapOptions } from '@2gis/mapgl/types/types'
 import { mapglInjectionKey } from './consts'
 import type { MapReadyCb, MapIsntance } from './types'
@@ -23,6 +23,12 @@ export function useMap() {
     },
     { immediate: true },
   )
+
+  onScopeDispose(() => {
+    if (map.value) {
+      map.value.destroy()
+    }
+  })
 
   function createMap(el: HTMLElement | string, options: MapOptions) {
     onMapglReady(sdk => {
