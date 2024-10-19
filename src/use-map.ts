@@ -12,23 +12,31 @@ export function useMap() {
 
   provide(mapglInjectionKey, { onMapReady })
 
-  const unwatch = watch(
-    map,
-    _map => {
-      if (_map) {
-        onMapReadyCbs.forEach(cb => cb(sdk.value!, _map))
-        onMapReadyCbs.length = 0
-        unwatch()
-      }
-    },
-    { immediate: true },
-  )
+  if (!map.value) {
+    const unwatch = watch(
+      map,
+      _map => {
+        if (_map) {
+          flushMapReadyCbs()
+          unwatch()
+        }
+      },
+      { immediate: true },
+    )
+  } else {
+    flushMapReadyCbs()
+  }
 
   onScopeDispose(() => {
     if (map.value) {
       map.value.destroy()
     }
   })
+
+  function flushMapReadyCbs() {
+    onMapReadyCbs.forEach(cb => cb(sdk.value!, map.value!))
+    onMapReadyCbs.length = 0
+  }
 
   function createMap(el: HTMLElement | string, options: MapOptions) {
     onMapglReady(sdk => {
