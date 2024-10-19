@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
-import { useMap } from './use-map'
+import { useMap } from '../use-map'
 import MapMarker from './components/MapMarker'
 
 const map = ref<HTMLDivElement>()

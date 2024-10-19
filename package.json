@@ -3,6 +3,17 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "files": [
+    "dist"
+  ],
+  "module": "./dist/mapgl-vue.js",
+  "types": "./dist/dts/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/mapgl-vue.js",
+      "types": "./dist/dts/index.d.ts"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
@@ -35,6 +46,7 @@
     "prettier": "^3.3.3",
     "typescript": "~5.5.4",
     "vite": "^5.4.8",
+    "vite-plugin-dts": "^4.2.4",
     "vitest": "^2.1.2",
     "vue-tsc": "^2.1.6"
   }

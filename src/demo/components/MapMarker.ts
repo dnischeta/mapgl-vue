@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue'
-import { useMapChild } from '../use-map-child'
+import { useMapChild } from '../../use-map-child'
 
 export default defineComponent({
   setup() {
