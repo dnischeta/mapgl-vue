@@ -18,17 +18,26 @@ export function useMapgl() {
   const loading = computed(() => !mapgl.sdk.value)
   const sdk = computed(() => mapgl.sdk.value)
 
-  const unwatch = watch(
-    sdk,
-    _sdk => {
-      if (_sdk) {
-        onMapglReadyCbs.forEach(cb => cb(_sdk))
-        onMapglReadyCbs.length = 0
-        unwatch()
-      }
-    },
-    { immediate: true },
-  )
+
+  if (!sdk.value) {
+    const unwatch = watch(
+      sdk,
+      _sdk => {
+        if (_sdk) {
+          flushMapglReadyCbs()
+          unwatch()
+        }
+      },
+      { immediate: true },
+    )
+  } else {
+    flushMapglReadyCbs()
+  }
+
+  function flushMapglReadyCbs() {
+    onMapglReadyCbs.forEach(cb => cb(sdk.value!))
+    onMapglReadyCbs.length = 0
+  }
 
   function onMapglReady(cb: (sdk: Mapgl) => void) {
     if (sdk.value) {
