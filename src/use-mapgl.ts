@@ -18,7 +18,6 @@ export function useMapgl() {
   const loading = computed(() => !mapgl.sdk.value)
   const sdk = computed(() => mapgl.sdk.value)
 
-
   if (!sdk.value) {
     const unwatch = watch(
       sdk,
