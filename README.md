@@ -22,6 +22,10 @@ createApp(App)
   .mount('#app')
 ```
 
+## Demo
+
+See mini demo at https://stackblitz.com/edit/vitejs-vite-3zocdw?file=src%2Fmain.js
+
 ## Exported Entities
 
 The library exports the following entities:
