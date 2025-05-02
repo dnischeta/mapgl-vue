@@ -1,4 +1,4 @@
-import { provide, shallowRef, watch, onScopeDispose } from 'vue'
+import { provide, shallowRef, watch, onScopeDispose, shallowReadonly } from 'vue'
 import type { MapOptions } from '@2gis/mapgl/types/types'
 import { mapglInjectionKey } from './consts'
 import type { MapReadyCb, MapIsntance } from './types'
@@ -53,6 +53,7 @@ export function useMap() {
   }
 
   return {
+    map: shallowReadonly(map),
     createMap,
   }
 }
